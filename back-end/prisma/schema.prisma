@@ -9,3 +9,28 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  cpf              String      @id
+  name             String
+  birth_date       DateTime?
+  phone            String
+  email            String      @unique
+  cep              String
+  street_name      String
+  house_number     String
+  complements      String?
+  neighborhood     String
+  city             String
+  state            String
+}
+
+model Book {
+  code             String      @id @unique
+  title            String      @unique
+  year             String
+  author           String
+  availability     Boolean     
+  belongs_to       String
+  quantity         Int
+}
