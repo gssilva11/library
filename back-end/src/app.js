@@ -22,8 +22,8 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 //////////////////////////////////////////////////////////
-import userRouter from './routes/user.js'
-app.use('/user', userRouter)
+import userRouter from './routes/customer.js'
+app.use('/customer', userRouter)
 
 import bookRouter from './routes/book.js'
 app.use('/book', bookRouter)

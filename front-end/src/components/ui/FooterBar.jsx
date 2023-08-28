@@ -21,7 +21,7 @@ export default function FooterBar() {
       }}
     >
       <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-          Desenvolvido com <CoffeeIcon fontSize="small" /> por <a href="mailto:gssilva2711@gmail.com"> Gabriel Silva </a>. Todos os direitos reservados.
+          Desenvolvido com <CoffeeIcon fontSize="small" /> por <a href="mailto:gssilva2711@gmail.com"> Gabriel S Silva </a>. Todos os direitos reservados.
       </Typography>
     </Toolbar>
   );

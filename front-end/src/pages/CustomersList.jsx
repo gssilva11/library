@@ -11,17 +11,17 @@ import Button from '@mui/material/Button'
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { Link } from 'react-router-dom'
 
-export default function UserList() {
+export default function CustomersList() {
 
-  const API_ENDPOINT = import.meta.env.VITE_API_BASE + 'user'
+  const API_ENDPOINT = import.meta.env.VITE_API_BASE + 'customer'
 
   const [state, setState] = React.useState({
-    user: {}
+    customers: {}
   })
 
   // Desestruturando as variáveis de estado
   const {
-    user
+    customers
   } = state
 
   // Este useEffect() será executado apenas uma vez, durante o
@@ -35,7 +35,7 @@ export default function UserList() {
       const result = await fetch(API_ENDPOINT)
 
       // Requisição OK
-      if(result.ok) setState({...state, user: await result.json()})
+      if(result.ok) setState({...state, customers: await result.json()})
       
       // Requisição com erro
       else throw new Error(`[HTTP ${result.status}] ${result.statusText}`)
@@ -48,72 +48,45 @@ export default function UserList() {
   }
 
   const columns = [
-    {
+    { 
       field: 'cpf',
       headerName: 'CPF',
-      width: 100
+      width: 150 
     },
     {
       field: 'name',
       headerName: 'Nome',
-      align: 'center',
-      headerAlign: 'center',
-      width: 100
+      width: 150
     },
     {
       field: 'birth_date',
       headerName: 'Data nasc.',
       align: 'center',
       headerAlign: 'center',
-      width: 100,
+      width: 150,
       valueFormatter: params => {
         if(params.value) return format(new Date(params.value), 'dd/MM/yyyy')
         else return ''
       }
     },
     {
+      field: 'city',
+      headerName: 'Cidade',
+      width: 150,
+      // Colocando dois campos na mesma célula
+      // valueGetter: params => params.row.municipality + '/' + params.row.state
+    },
+    {
       field: 'phone',
       headerName: 'Celular',
       align: 'center',
       headerAlign: 'center',
-      width: 100
+      width: 150
     },
     {
       field: 'email',
       headerName: 'E-mail',
-      width: 100
-    },
-    {
-      field: 'cep',
-      headerName: 'CEP',
-      width: 100,
-    },
-    {
-      field: 'street_name',
-      headerName: 'Logradouro',
-      width: 100,
-    },
-    {
-      field: 'house_number',
-      headerName: 'Número da casa',
-      width: 100,
-    },
-    {
-      field: 'complements',
-      headerName: 'Complemento',
-      width: 100,
-    },
-    {
-      field: 'neighborhood',
-      headerName: 'Bairro',
-      width: 100,
-    },
-    {
-      field: 'city',
-      headerName: 'Município/UF',
-      width: 100,
-      // Colocando dois campos na mesma célula
-      valueGetter: params => params.row.city + '/' + params.row.state
+      width: 150
     },
     {
       field: 'edit',
@@ -186,7 +159,7 @@ export default function UserList() {
 
       <Paper elevation={4} sx={{ height: 400, width: '100%' }}>
         <DataGrid
-          rows={user}
+          rows={customers}
           columns={columns}
           initialState={{
             pagination: {

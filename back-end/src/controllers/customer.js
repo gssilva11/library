@@ -4,7 +4,7 @@ const controller = {}       // Objeto vazio
 
 controller.create = async function(req, res) {
     try {
-        await prisma.user.create({data: req.body})
+        await prisma.customer.create({data: req.body})
 
         // HTTP 201: Created
         res.status(201).end()
@@ -18,7 +18,7 @@ controller.create = async function(req, res) {
 
 controller.retrieveAll = async function(req, res) {
     try {
-        const result = await prisma.user.findMany({
+        const result = await prisma.customer.findMany({
             orderBy: [
                 { name: 'asc' }
             ]
@@ -36,7 +36,7 @@ controller.retrieveAll = async function(req, res) {
 
 controller.retrieveOne = async function(req, res) {
     try {
-        const result = await prisma.user.findUnique({
+        const result = await prisma.customer.findUnique({
             where: { cpf: req.params.cpf } // req.params.cpf?
         })
 
@@ -54,7 +54,7 @@ controller.retrieveOne = async function(req, res) {
 
 controller.update = async function(req, res) {
     try {
-        const result = await prisma.user.update({
+        const result = await prisma.customer.update({
             where: { cpf: req.params.cpf }, // req.params.cpf?
             data: req.body
         })
@@ -73,7 +73,7 @@ controller.update = async function(req, res) {
 
 controller.delete = async function(req, res) {
     try {
-        const result = await prisma.user.delete({
+        const result = await prisma.customer.delete({
             where: { cpf: req.params.cpf }
         })
 

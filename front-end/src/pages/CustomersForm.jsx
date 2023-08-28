@@ -3,115 +3,112 @@ import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 
+export default function CustomersForm() {
 
-export default function UserForm() {
-  
   const [state, setState] = React.useState({
-    user: {}      // objeto vazio
+    customer: {}    // Objeto vazio
   })
 
-  const states = [
-    { label: 'Distrito Federal', value: 'DF'},
-    { label: 'Espírito Santo', value: 'ES'},
-    { label: 'Goiás', value: 'GO'},
-    { label: 'Minas Gerais', value: 'MG'},
-    { label: 'Paraná', value: 'PR'},
-    { label: 'Rio de Janeiro', value: 'RJ'},
-    { label: 'São Paulo', value: 'SP'}
-  ]
-
   const {
-    user 
+    customer
   } = state
+
+  const states = [
+    { label: 'Distrito Federal', value: 'DF' },
+    { label: 'Espírito Santo', value: 'ES' },
+    { label: 'Goiás', value: 'GO' },
+    { label: 'Minas Gerais', value: 'MG' },
+    { label: 'Paraná', value: 'PR' },
+    { label: 'Rio de Janeiro', value: 'RJ' },
+    { label: 'São Paulo', value: 'SP' }
+  ]
 
   return(
     <>
       <Typography variant="h1" sx={{ mb: '50px' }}>
         Cadastro de clientes
       </Typography>
-      
-      <form>
-        <TextField 
-          id="cpf"
-          name="CPF" 
-          label="CPF"
-          variant="outlined"
-          required
-          fullWidth
-          placeholder='Ex.: 000.000.000-00'
-          value={user.cpf}
-        />
 
+      <form>
+        
         <TextField 
           id="name"
           name="name" 
-          label="Nome completo"       // nome que aparece em cima do campo 
-          variant="outlined"          // aparência do campo
+          label="Nome completo" 
+          variant="filled"
           required
           fullWidth
-          value={user.name}
-          />
+          value={customer.name}
+        />
+
+        <TextField 
+          id="ident_document"
+          name="ident_document" 
+          label="CPF" 
+          variant="filled"
+          required
+          fullWidth
+          value={customer.ident_document}
+        />
 
         <TextField 
           id="birth_date"
           name="birth_date" 
-          label="Data de nascimento"
-          variant="outlined"
+          label="Data de nascimento" 
+          variant="filled"
           fullWidth
-          placeholder='DD/MM/AAAA'
-          value={user.birth_date}
-        />
-
-        <TextField 
-          id="cep"
-          name="cep" 
-          label="CEP"
-          variant="outlined"
-          required
-          fullWidth
-          placeholder='00000-000'
-          value={user.cep}
+          value={customer.birth_date}
         />
 
         <TextField 
           id="street_name"
           name="street_name" 
-          label="Logradouro (Rua, Av., etc)"
-          variant="outlined"
+          label="Logradouro (Rua, Av., etc.)" 
+          variant="filled"
           required
           fullWidth
-          placeholder='Ex.: Rua Principal'
-          value={user.street_name}
+          placeholder="Ex.: Rua Principal"
+          value={customer.street_name}
         />
 
         <TextField 
           id="house_number"
           name="house_number" 
-          label="Número da casa"
-          variant="outlined"
+          label="Nº" 
+          variant="filled"
           required
           fullWidth
-          value={user.house_number}
+          value={customer.house_number}
         />
 
         <TextField 
           id="complements"
           name="complements" 
-          label="Complemento"
-          variant="outlined"
+          label="Complemento" 
+          variant="filled"
           fullWidth
-          placeholder='Apto., bloco, casa, etc.'
-          value={user.complements}
+          placeholder="Apto., bloco, casa, etc."
+          value={customer.complements}
         />
 
         <TextField 
           id="neighborhood"
           name="neighborhood" 
-          label="Bairro"
-          variant="outlined"
+          label="Bairro" 
+          variant="filled"
           required
           fullWidth
-          value={user.neighborhood}
+          value={customer.neighborhood}
+        />
+        
+        <TextField 
+          id="municipality"
+          name="municipality" 
+          label="Município" 
+          variant="filled"
+          required
+          fullWidth
+          value={customer.municipality}
         />
 
         <TextField
@@ -119,57 +116,41 @@ export default function UserForm() {
           name="state"
           select
           label="UF"
-          variant="outlined"
+          variant="filled"
           fullWidth
           required
-          SelectProps={{
-          native: false,
-          }}
-          helperText="Please select your currency"
+          value={customer.state}
         >
           {states.map((option) => (
-            <option key={option.value} value={option.value}>
+            <MenuItem key={option.value} value={option.value}>
               {option.label}
-            </option>
+            </MenuItem>
           ))}
         </TextField>
 
         <TextField 
-          id="city"
-          name="city" 
-          label="Cidade"
-          variant="outlined"
-          required
-          fullWidth
-          value={user.city}
-        />
-  
-        <TextField 
           id="phone"
           name="phone" 
-          label="Celular / Telefone de contato"
-          variant="outlined"
-          type='phone'
+          label="Celular / Telefone de contato" 
+          variant="filled"
           required
           fullWidth
-          placeholder='(00) 00000-0000'
-          value={user.phone}
+          value={customer.phone}
         />
-  
+
         <TextField 
           id="email"
           name="email" 
-          label="E-mail"
-          variant="outlined"
-          type='email'
+          label="E-mail" 
+          variant="filled"
           required
           fullWidth
-          placeholder='email@email.com'
-          value={user.email}
+          value={customer.email}
         />
-
-
+      
       </form>
     </>
+
+    
   )
 }
