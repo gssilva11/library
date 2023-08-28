@@ -27,10 +27,9 @@ model User {
 
 model Book {
   code             String      @id @unique
-  title            String      @unique
+  title            String
   year             String
   author           String
   availability     Boolean     
   belongs_to       String
-  quantity         Int
 }

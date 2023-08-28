@@ -11,15 +11,17 @@ import Button from '@mui/material/Button'
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { Link } from 'react-router-dom'
 
-export default function CustomersList() {
+export default function UserList() {
+
+  const API_ENDPOINT = import.meta.env.VITE_API_BASE + 'user'
 
   const [state, setState] = React.useState({
-    customers: {}
+    user: {}
   })
 
   // Desestruturando as variáveis de estado
   const {
-    customers
+    user
   } = state
 
   // Este useEffect() será executado apenas uma vez, durante o
@@ -30,10 +32,10 @@ export default function CustomersList() {
 
   async function loadData() {
     try {
-      const result = await fetch('https://api.faustocintra.com.br/customers')
+      const result = await fetch(API_ENDPOINT)
 
       // Requisição OK
-      if(result.ok) setState({...state, customers: await result.json()})
+      if(result.ok) setState({...state, user: await result.json()})
       
       // Requisição com erro
       else throw new Error(`[HTTP ${result.status}] ${result.statusText}`)
@@ -46,18 +48,17 @@ export default function CustomersList() {
   }
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    {
+      field: 'cpf',
+      headerName: 'CPF',
+      width: 100
+    },
     {
       field: 'name',
       headerName: 'Nome',
-      width: 300
-    },
-    {
-      field: 'ident_document',
-      headerName: 'CPF',
       align: 'center',
       headerAlign: 'center',
-      width: 150
+      width: 100
     },
     {
       field: 'birth_date',
@@ -71,23 +72,48 @@ export default function CustomersList() {
       }
     },
     {
-      field: 'city',
-      headerName: 'Município/UF',
-      width: 300,
-      // Colocando dois campos na mesma célula
-      valueGetter: params => params.row.city + '/' + params.row.uf
-    },
-    {
       field: 'phone',
       headerName: 'Celular',
       align: 'center',
       headerAlign: 'center',
-      width: 150
+      width: 100
     },
     {
       field: 'email',
       headerName: 'E-mail',
-      width: 200
+      width: 100
+    },
+    {
+      field: 'cep',
+      headerName: 'CEP',
+      width: 100,
+    },
+    {
+      field: 'street_name',
+      headerName: 'Logradouro',
+      width: 100,
+    },
+    {
+      field: 'house_number',
+      headerName: 'Número da casa',
+      width: 100,
+    },
+    {
+      field: 'complements',
+      headerName: 'Complemento',
+      width: 100,
+    },
+    {
+      field: 'neighborhood',
+      headerName: 'Bairro',
+      width: 100,
+    },
+    {
+      field: 'city',
+      headerName: 'Município/UF',
+      width: 100,
+      // Colocando dois campos na mesma célula
+      valueGetter: params => params.row.city + '/' + params.row.state
     },
     {
       field: 'edit',
@@ -96,7 +122,7 @@ export default function CustomersList() {
       align: 'center',
       width: 90,
       renderCell: params =>
-        <Link to={'./' + params.id}>
+        <Link to={'./' + params.cpf}>
           <IconButton aria-label="Editar">
             <EditIcon />
           </IconButton>
@@ -111,18 +137,18 @@ export default function CustomersList() {
       renderCell: params =>
         <IconButton 
           aria-label="Excluir"
-          onClick={() => handleDeleteButtonClick(params.id)}
+          onClick={() => handleDeleteButtonClick(params.cpf)}
         >
           <DeleteForeverIcon color="error" />
         </IconButton>
     }
   ];
 
-  async function handleDeleteButtonClick(id) {
+  async function handleDeleteButtonClick(cpf) {
     if(confirm('Deseja realmente excluir este item?')) {
       try {
         // Faz a chamada ao back-end para excluir o cliente
-        const result = await fetch(`https://api.faustocintra.com.br/customers/${id}`, {
+        const result = await fetch(`${API_ENDPOINT}/${cpf}`, {
           method: 'DELETE'
         })
         // Se a exclusão tiver sido feita com sucesso, atualiza a listagem
@@ -160,7 +186,7 @@ export default function CustomersList() {
 
       <Paper elevation={4} sx={{ height: 400, width: '100%' }}>
         <DataGrid
-          rows={customers}
+          rows={user}
           columns={columns}
           initialState={{
             pagination: {

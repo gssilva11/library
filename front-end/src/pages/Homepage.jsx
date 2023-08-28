@@ -10,7 +10,7 @@ export default function Homepage() {
       <Typography variant="h1" sx={{
         mb: '50px'    // marginBottom
       }}>
-        Bem-vindo(a) à loja Karangos!
+        Bem-vindo(a) à Biblioteca!
       </Typography>
 
       <Box sx={{
