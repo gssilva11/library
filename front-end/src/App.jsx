@@ -35,7 +35,7 @@ function App() {
                 <Route path="/" element={ <Homepage /> } />
                 <Route path="/customers" element={ <CustomersList /> } />
                 <Route path="/customers/new" element={ <CustomersForm /> } />
-                <Route path="/customers/:cpf" element={ <CustomersForm /> } />
+                <Route path="/customers/:id" element={ <CustomersForm /> } />
               </Routes>
 
             </Box>

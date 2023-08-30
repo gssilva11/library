@@ -48,14 +48,17 @@ export default function CustomersList() {
   }
 
   const columns = [
-    { 
-      field: 'cpf',
-      headerName: 'CPF',
-      width: 150 
-    },
+    { field: 'id', headerName: 'ID', width: 90 },
     {
       field: 'name',
       headerName: 'Nome',
+      width: 300
+    },
+    {
+      field: 'ident_document',
+      headerName: 'CPF',
+      align: 'center',
+      headerAlign: 'center',
       width: 150
     },
     {
@@ -63,18 +66,18 @@ export default function CustomersList() {
       headerName: 'Data nasc.',
       align: 'center',
       headerAlign: 'center',
-      width: 150,
+      width: 100,
       valueFormatter: params => {
         if(params.value) return format(new Date(params.value), 'dd/MM/yyyy')
         else return ''
       }
     },
     {
-      field: 'city',
-      headerName: 'Cidade',
-      width: 150,
+      field: 'municipality',
+      headerName: 'Município/UF',
+      width: 300,
       // Colocando dois campos na mesma célula
-      // valueGetter: params => params.row.municipality + '/' + params.row.state
+      valueGetter: params => params.row.municipality + '/' + params.row.state
     },
     {
       field: 'phone',
@@ -86,7 +89,7 @@ export default function CustomersList() {
     {
       field: 'email',
       headerName: 'E-mail',
-      width: 150
+      width: 200
     },
     {
       field: 'edit',
@@ -95,7 +98,7 @@ export default function CustomersList() {
       align: 'center',
       width: 90,
       renderCell: params =>
-        <Link to={'./' + params.cpf}>
+        <Link to={'./' + params.id}>
           <IconButton aria-label="Editar">
             <EditIcon />
           </IconButton>
@@ -110,18 +113,18 @@ export default function CustomersList() {
       renderCell: params =>
         <IconButton 
           aria-label="Excluir"
-          onClick={() => handleDeleteButtonClick(params.cpf)}
+          onClick={() => handleDeleteButtonClick(params.id)}
         >
           <DeleteForeverIcon color="error" />
         </IconButton>
     }
   ];
 
-  async function handleDeleteButtonClick(cpf) {
+  async function handleDeleteButtonClick(id) {
     if(confirm('Deseja realmente excluir este item?')) {
       try {
         // Faz a chamada ao back-end para excluir o cliente
-        const result = await fetch(`${API_ENDPOINT}/${cpf}`, {
+        const result = await fetch(`${API_ENDPOINT}/${id}`, {
           method: 'DELETE'
         })
         // Se a exclusão tiver sido feita com sucesso, atualiza a listagem
