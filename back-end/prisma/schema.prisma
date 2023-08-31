@@ -10,26 +10,126 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Customer {
-  cpf              String      @id
-  name             String
-  birth_date       DateTime?
-  phone            String
-  email            String      @unique
-  cep              String
-  street_name      String
-  house_number     String
-  complements      String?
-  neighborhood     String
-  city             String
-  state            String
+model Book {
+  code          String         @id @default(uuid())
+  title         String
+  author        String
+  year          DateTime
+  belongs_to    String
+  publisher     Publisher      @relation(fields: [publisher_id], references: [id_p])
+  publisher_id  String   
+  status        BookStatus
+  Operations    Operation[]
+
+  @@map("books")
+  
 }
 
-model Book {
-  code             String      @id @unique
-  title            String
-  year             String
-  author           String
-  availability     Boolean     
-  belongs_to       String
+enum BookStatus {
+  AVAILABLE
+  RESERVED
+  BORROWED
+}
+
+model Publisher {
+  id_p     String      @id @default(uuid())
+  name_p   String
+  city_p   String
+  state_p  String
+  books    Book[]
+}
+
+model Operation {
+  // id           String         @default(uuid())
+  createdAt    DateTime       @default(now())
+  expectedDate DateTime
+  finalDate    DateTime?
+  type         OperationType
+  book         Book           @relation(fields: [bookCode], references: [code])
+  bookCode     String         
+  student      User           @relation(fields: [studentCPF], references: [cpf])
+  studentCPF   String
+
+  @@id([bookCode, studentCPF, createdAt, type])
+}
+
+enum OperationType {
+  RESERVE
+  BORROW
+}
+
+model User {
+  cpf          String      @id
+  email        String      @unique
+  password     String
+  name         String
+  code         String      @unique
+  phone        String
+  birth_date   DateTime
+  street_name  String
+  street_type  StreetType
+  house_number String
+  complements  String?
+  neighborhood String
+  city         String 
+  state        String
+  cep          Int
+  institution  String
+  role         Role        @default(STUDENT)
+  Operations      Operation[]
+
+  @@map("users")
+}
+
+enum Role {
+  STUDENT
+  EMPLOYEE
+  ADMIN
+}
+
+enum StreetType {
+  AEROPORTO
+  ALAMEDA
+  AREA
+  AVENIDA
+  CAMPO
+  CHACARA
+  COLONIA
+  CONDOMINIO
+  CONJUNTO
+  DISTRITO
+  ESPLANADA
+  ESTACAO
+  ESTRADA
+  FAVELA
+  FAZENDA
+  FEIRA
+  JARDIM
+  LADEIRA
+  LAGO
+  LAGOA
+  LARGO
+  LOTEAMENTO
+  MORRO
+  NUCLEO
+  PARQUE
+  PASSARELA
+  PATIO
+  PRACA
+  QUADRA
+  RECANTO
+  RESIDENCIAL
+  RODOVIA
+  RUA
+  SETOR
+  SITIO
+  TRAVESSA
+  TRECHO
+  TREVO
+  VALE
+  VEREDA
+  VIA
+  VIADUTO
+  VIELA
+  VILA
 }
