@@ -26,4 +26,10 @@ app.use("/users", usersRouter);
 import bookRouter from './routes/book.js'
 app.use('/book', bookRouter)
 
+import userRouter from './routes/user.js'
+app.use('/user', userRouter)
+
+import publisherRouter from './routes/publisher.js'
+app.use('/publisher', publisherRouter)
+
 export default app;

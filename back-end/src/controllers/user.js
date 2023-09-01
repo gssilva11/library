@@ -1,10 +1,10 @@
 import prisma from '../database/client.js';
 
-const book = {}
+const user = {}
 
-book.create = async function(req, res) {
+user.create = async function(req, res) {
     try {
-        await prisma.book.create({data: req.body})
+        await prisma.user.create({data: req.body})
 
         // HTTP 201: Created
         res.status(201).end()
@@ -16,12 +16,11 @@ book.create = async function(req, res) {
     }
 }
 
-book.retrieveAvailable = async function(req, res){
+user.retrieveAll = async function(req, res){
     try{
-        const result = await prisma.book.findMany({
-            where: { status: 'AVAILABLE' },
+        const result = await prisma.user.findMany({
             orderBy: [
-                {title: 'asc'}
+                {name: 'asc'}
             ]
         })
         if(result) res.send(result)
@@ -33,13 +32,14 @@ book.retrieveAvailable = async function(req, res){
     }
 }
 
-book.retrieveBorrowed = async function(req, res){
+user.retrieveByCpf = async function(req, res){
     try{
-        const result = await prisma.book.findMany({
-            where: { status: 'BORROWED' },
-            orderBy: [
-                {title: 'asc'}
-            ]
+        const result = await prisma.user.findUnique({
+            where: { cpf: req.params.cpf }
+            // ,
+            // orderBy: [
+            //     {name: 'asc'}
+            // ]
         })
         if(result) res.send(result)
         else res.status(404).end()
@@ -50,13 +50,14 @@ book.retrieveBorrowed = async function(req, res){
     }
 }
 
-book.retrieveReserved = async function(req, res){
+user.retrieveByName = async function(req, res){
     try{
-        const result = await prisma.book.findMany({
-            where: { status: 'RESERVED' },
-            orderBy: [
-                {title: 'asc'}
-            ]
+        const result = await prisma.user.findFirstOrThrow({
+            where: { name: req.params.name }
+            //,
+            // orderBy: [
+            //     {name: 'asc'}
+            // ]
         })
         if(result) res.send(result)
         else res.status(404).end()
@@ -67,54 +68,32 @@ book.retrieveReserved = async function(req, res){
     }
 }
 
-book.retrieveAll = async function(req, res){
+user.retrieveByCode = async function(req, res){
     try{
-        const result = await prisma.book.findMany({
-            orderBy: [
-                {title: 'asc'}
-            ]
-        })
-        if(result) res.send(result)
-        else res.status(404).end()
-    }
-    catch(error){
-        console.error(error)
-        res.status(500).send(error)
-    }
-}
-
-book.retrieveByTitle = async function(req, res){
-    try{
-        const result = await prisma.book.findMany({
-            where: {title: req.params.title} 
-        })
-        if(result) res.send(result)
-        else res.status(404).end()
-    }
-    catch(error){
-        console.error(error)
-        res.status(500).send(error)
-    }
-}
-
-book.retrieveByAuthor = async function(req, res){
-    try{
-        const result = await prisma.book.findMany({
-            where: {author: req.params.author}
-        })
-        if(result) res.send(result)
-        else res.status(404).end()
-    }
-    catch(error){
-        console.error(error)
-        res.status(500).send(error)
-    }
-}
-
-book.retrieveByCode = async function(req, res){
-    try{
-        const result = await prisma.book.findUnique({
+        const result = await prisma.user.findUnique({
             where: { code: req.params.code }
+            //,
+            // orderBy: [
+            //     {name: 'asc'}
+            // ]
+        })
+        if(result) res.send(result)
+        else res.status(404).end()
+    }
+    catch(error){
+        console.error(error)
+        res.status(500).send(error)
+    }
+}
+ 
+user.retrieveByAvailable = async function(req, res){
+    try{
+        const result = await prisma.user.findMany({
+            where: {status: 'AVAILABLE'}
+            //,
+            // orderBy: [
+            //     {name: 'asc'}
+            // ]
         })
         if(result) res.send(result)
         else res.status(404).end()
@@ -125,10 +104,28 @@ book.retrieveByCode = async function(req, res){
     }
 }
 
-book.update = async function(req, res) {
+user.retrieveByUnavailable = async function(req, res){
+    try{
+        const result = await prisma.user.findMany({
+            where: {status: 'UNAVAILABLE'}
+            // ,
+            // orderBy: [
+            //     {name: 'asc'}
+            // ]
+        })
+        if(result) res.send(result)
+        else res.status(404).end()
+    }
+    catch(error){
+        console.error(error)
+        res.status(500).send(error)
+    }
+}
+
+user.update = async function(req, res) {
     try {
-        const result = await prisma.book.update({
-            where: { code: req.params.code },
+        const result = await prisma.user.update({
+            where: { cpf: req.params.cpf },
             data: req.body
         })
         if(result) res.status(204).end()
@@ -140,10 +137,10 @@ book.update = async function(req, res) {
     }
 }
 
-book.delete = async function(req, res) {
+user.delete = async function(req, res) {
     try {
-        const result = await prisma.book.delete({
-            where: { code: req.params.code },
+        const result = await prisma.user.delete({
+            where: { cpf: req.params.cpf },
         })
         if(result) res.status(204).end()
         else res.status(404).end()
@@ -154,4 +151,4 @@ book.delete = async function(req, res) {
     }
 }
 
-export default book
+export default user

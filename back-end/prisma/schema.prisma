@@ -22,7 +22,7 @@ model Book {
   Operations    Operation[]
 
   @@map("books")
-  
+
 }
 
 enum BookStatus {
@@ -76,9 +76,15 @@ model User {
   cep          Int
   institution  String
   role         Role        @default(STUDENT)
-  Operations      Operation[]
+  Operations   Operation[]
+  status       UserStatus  @default(AVAILABLE)
 
   @@map("users")
+}
+
+enum UserStatus {
+  AVAILABLE
+  UNAVAILABLE
 }
 
 enum Role {
