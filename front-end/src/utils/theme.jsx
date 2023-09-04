@@ -1,15 +1,15 @@
 import { createTheme } from '@mui/material/styles';
-import { yellow, pink } from '@mui/material/colors';
+import { brown, red} from '@mui/material/colors';
 import { ptBR } from '@mui/x-data-grid'
 
 const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: yellow[600],
+      main: brown[900],
     },
     secondary: {
-      main: pink[500],
+      main: red[900],
     },
   },
   typography: {

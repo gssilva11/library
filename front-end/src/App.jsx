@@ -15,11 +15,14 @@ import CssBaseline from '@mui/material/CssBaseline'
 import Homepage from './pages/Homepage'
 
 import UserList from './pages/UserList'
-// import UsersForm from './pages/UsersForm'
+import UserForm from './pages/UserForm'
 
 import BookList from './pages/BookList'
+import BookForm from './pages/BookForm'
 
 import PublisherList from './pages/PublisherList'
+import PublisherForm from './pages/PublisherForm'
+
 
 function App() {
   return (
@@ -41,15 +44,16 @@ function App() {
                 <Route path="/" element={ <Homepage /> } />
                                  
                 <Route path="/user" element={ <UserList /> } />
-                {/*
-                <Route path="/users/new" element={ <UsersForm /> } />
-                <Route path="/users/:cpf" element={ <UsersList /> } /> 
-                */}
-
+                <Route path="/user/new" element={ <UserForm /> } />
+{/*                 
+                <Route path="/users/:cpf" element={ <UserList /> } />
+*/}
                 <Route path="/book" element={ <BookList /> } />
+                <Route path="/book/new" element={ <BookForm /> } />
 
 
                 <Route path="/publisher" element={ <PublisherList /> } />
+                <Route path="/publisher/new" element={ <PublisherForm /> } />
               </Routes>
 
             </Box>

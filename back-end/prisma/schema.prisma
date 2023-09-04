@@ -73,7 +73,7 @@ model User {
   neighborhood String
   city         String 
   state        String
-  cep          Int
+  cep          String
   institution  String
   role         Role        @default(STUDENT)
   Operations   Operation[]

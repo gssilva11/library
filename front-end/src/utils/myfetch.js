@@ -1,15 +1,13 @@
 const myfetch = {}  // Objeto vazio
 
 // Lê o endereço do back-end a partir do arquivo .env.local
-// MODIFICADO: atualizar import para VITE_API_BASE
 const baseUrl = import.meta.env.VITE_API_BASE
 
 function defaultOptions(body = null, method = 'GET') {
   const options = {
     method,
     headers: {"Content-type": "application/json; charset=UTF-8"},
-    // MODIFICADO:  comentar <credentials>
-    // credentials: 'include'
+
   }
 
   if(body) options.body = JSON.stringify(body)

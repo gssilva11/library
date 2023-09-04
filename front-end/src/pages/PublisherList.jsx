@@ -10,6 +10,13 @@ import Button from '@mui/material/Button'
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { Link } from 'react-router-dom'
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+
 export default function PublisherList() {
 
   const API_ENDPOINT = import.meta.env.VITE_API_BASE + 'publisher'
@@ -94,22 +101,23 @@ export default function PublisherList() {
     }
   ];
 
-  // async function handleDeleteButtonClick(id) {
-  //   if(confirm('Deseja realmente excluir este item?')) {
-  //     try {
-  //       // Faz a chamada ao back-end para excluir o cliente
-  //       const result = await fetch(`${API_ENDPOINT}/${id}`, {
-  //         method: 'DELETE'
-  //       })
-  //       // Se a exclusão tiver sido feita com sucesso, atualiza a listagem
-  //       if(result.ok) loadData()
-  //       alert('Exclusão efetuada com sucesso!')
-  //     }
-  //     catch(error) {
-  //       console.error(error)
-  //     }
-  //   }
-  // }
+  async function handleDeleteButtonClick(id) {
+    if(confirm('Deseja realmente excluir este item?')) {
+      try {
+        // Faz a chamada ao back-end para excluir o cliente
+        const result = await fetch(`${API_ENDPOINT}/${id}`, {
+          method: 'DELETE'
+        })
+        // Se a exclusão tiver sido feita com sucesso, atualiza a listagem
+        if(result.ok) loadData()
+        alert('Exclusão efetuada com sucesso!')
+      }
+      catch(error) {
+        console.error(error)
+      }
+    }
+  }
+  
   
   return (
     <>

@@ -112,15 +112,6 @@ export default function UserList() {
       headerName: 'Status',
       width: 120
     },
-
-    // {
-    //   field: 'city',
-    //   headerName: 'Município/UF',
-    //   width: 300,
-    //   // Colocando dois campos na mesma célula
-    //   valueGetter: params => params.row.city + '/' + params.row.state
-    // },
-
     {
       field: 'edit',
       headerName: 'Editar',
@@ -150,27 +141,27 @@ export default function UserList() {
     }
   ];
 
-  // async function handleDeleteButtonClick(id) {
-  //   if(confirm('Deseja realmente excluir este item?')) {
-  //     try {
-  //       // Faz a chamada ao back-end para excluir o cliente
-  //       const result = await fetch(`${API_ENDPOINT}/${id}`, {
-  //         method: 'DELETE'
-  //       })
-  //       // Se a exclusão tiver sido feita com sucesso, atualiza a listagem
-  //       if(result.ok) loadData()
-  //       alert('Exclusão efetuada com sucesso!')
-  //     }
-  //     catch(error) {
-  //       console.error(error)
-  //     }
-  //   }
-  // }
+  async function handleDeleteButtonClick(id) {
+    if(confirm('Deseja realmente excluir este item?')) {
+      try {
+        // Faz a chamada ao back-end para excluir o cliente
+        const result = await fetch(`${API_ENDPOINT}/${id}`, {
+          method: 'DELETE'
+        })
+        // Se a exclusão tiver sido feita com sucesso, atualiza a listagem
+        if(result.ok) loadData()
+        alert('Exclusão efetuada com sucesso!')
+      }
+      catch(error) {
+        console.error(error)
+      }
+    }
+  }
   
   return (
     <>
       <Typography variant="h1" sx={{ mb: '50px' }}>
-        Listagem de usuários
+        Listagem de Usuários
       </Typography>
 
       <Box sx={{

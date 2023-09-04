@@ -109,22 +109,22 @@ export default function BookList() {
     }
   ];
 
-  // async function handleDeleteButtonClick(id) {
-  //   if(confirm('Deseja realmente excluir este item?')) {
-  //     try {
-  //       // Faz a chamada ao back-end para excluir o cliente
-  //       const result = await fetch(`${API_ENDPOINT}/${id}`, {
-  //         method: 'DELETE'
-  //       })
-  //       // Se a exclusão tiver sido feita com sucesso, atualiza a listagem
-  //       if(result.ok) loadData()
-  //       alert('Exclusão efetuada com sucesso!')
-  //     }
-  //     catch(error) {
-  //       console.error(error)
-  //     }
-  //   }
-  // }
+  async function handleDeleteButtonClick(id) {
+    if(confirm('Deseja realmente excluir este item?')) {
+      try {
+        // Faz a chamada ao back-end para excluir o cliente
+        const result = await fetch(`${API_ENDPOINT}/${id}`, {
+          method: 'DELETE'
+        })
+        // Se a exclusão tiver sido feita com sucesso, atualiza a listagem
+        if(result.ok) loadData()
+        alert('Exclusão efetuada com sucesso!')
+      }
+      catch(error) {
+        console.error(error)
+      }
+    }
+  }
   
   return (
     <>
