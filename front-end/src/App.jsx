@@ -26,7 +26,7 @@ import PublisherForm from './pages/PublisherForm'
 
 function App() {
   return (
-    <>
+    <>  
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />

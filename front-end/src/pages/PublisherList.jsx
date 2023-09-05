@@ -10,13 +10,6 @@ import Button from '@mui/material/Button'
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { Link } from 'react-router-dom'
 
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
-
 export default function PublisherList() {
 
   const API_ENDPOINT = import.meta.env.VITE_API_BASE + 'publisher'

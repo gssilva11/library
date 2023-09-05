@@ -14,8 +14,6 @@ import Notification from '../components/ui/Notification'
 // Para voltar a pagina de clientes
 import { useNavigate } from 'react-router-dom'
 
-import Alert from '../components/ui/Alert'
-
 export default function PublisherForm() {
   
   const navigate = useNavigate()

@@ -8,19 +8,19 @@ export default function FooterBar() {
     <Toolbar 
       variant="dense" 
       component="footer" 
-      sx={{ 
-        backgroundColor: 'action.disabledBackground',
+      sx={{
+        backgroundColor: 'black',
         justifyContent: 'center',
         minHeight: '30px',
         position: 'fixed',
         bottom: 0,
         width: '100vw',
         '& a': {
-          color: 'secondary.light'
+          color: 'red'
         }
       }}
     >
-      <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+      <Typography variant="caption" sx={{ color: 'grey' }}>
           Desenvolvido com <CoffeeIcon fontSize="small" /> por <a href="mailto:gssilva2711@gmail.com">Gabriel S Silva</a>. Todos os direitos reservados.
       </Typography>
     </Toolbar>
